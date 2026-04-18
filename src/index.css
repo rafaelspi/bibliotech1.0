@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* BiblioTech – paleta acolhedora terrosa com acento verde-musgo */
+@layer base {
+  :root {
+    --background: 39 38% 95%;
+    --foreground: 25 25% 15%;
+
+    --card: 36 33% 97%;
+    --card-foreground: 25 25% 15%;
+
+    --popover: 36 33% 97%;
+    --popover-foreground: 25 25% 15%;
+
+    --primary: 95 25% 28%;
+    --primary-foreground: 39 38% 96%;
+    --primary-glow: 95 30% 40%;
+
+    --secondary: 32 30% 88%;
+    --secondary-foreground: 25 30% 22%;
+
+    --muted: 35 22% 90%;
+    --muted-foreground: 25 15% 42%;
+
+    --accent: 28 55% 55%;
+    --accent-foreground: 39 38% 97%;
+
+    --destructive: 0 65% 48%;
+    --destructive-foreground: 39 38% 97%;
+
+    --border: 32 22% 82%;
+    --input: 32 22% 85%;
+    --ring: 95 25% 28%;
+
+    --radius: 0.625rem;
+
+    --gradient-warm: linear-gradient(135deg, hsl(39 38% 95%), hsl(32 35% 88%));
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --shadow-soft: 0 4px 16px -4px hsl(25 25% 15% / 0.08);
+    --shadow-book: 0 8px 24px -8px hsl(25 25% 15% / 0.18);
+    --transition-smooth: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 36 33% 97%;
+    --sidebar-foreground: 25 25% 15%;
+    --sidebar-primary: 95 25% 28%;
+    --sidebar-primary-foreground: 39 38% 96%;
+    --sidebar-accent: 32 30% 88%;
+    --sidebar-accent-foreground: 25 30% 22%;
+    --sidebar-border: 32 22% 82%;
+    --sidebar-ring: 95 25% 28%;
+  }
+
+  .dark {
+    --background: 25 18% 10%;
+    --foreground: 39 30% 92%;
+    --card: 25 18% 13%;
+    --card-foreground: 39 30% 92%;
+    --popover: 25 18% 13%;
+    --popover-foreground: 39 30% 92%;
+    --primary: 95 28% 55%;
+    --primary-foreground: 25 18% 10%;
+    --primary-glow: 95 30% 65%;
+    --secondary: 25 15% 20%;
+    --secondary-foreground: 39 30% 92%;
+    --muted: 25 12% 18%;
+    --muted-foreground: 35 15% 65%;
+    --accent: 28 55% 60%;
+    --accent-foreground: 25 18% 10%;
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 39 30% 92%;
+    --border: 25 15% 22%;
+    --input: 25 15% 22%;
+    --ring: 95 28% 55%;
+    --sidebar-background: 25 18% 10%;
+    --sidebar-foreground: 39 30% 92%;
+    --sidebar-primary: 95 28% 55%;
+    --sidebar-primary-foreground: 25 18% 10%;
+    --sidebar-accent: 25 15% 20%;
+    --sidebar-accent-foreground: 39 30% 92%;
+    --sidebar-border: 25 15% 22%;
+    --sidebar-ring: 95 28% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-serif tracking-tight;
+  }
+}
