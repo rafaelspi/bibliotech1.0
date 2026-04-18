@@ -1,10 +1,10 @@
 import { useMemo, useState } from "react";
 import { useBooks } from "@/hooks/useBooks";
 import { Book, BookStatus, STATUS_LABELS } from "@/types/book";
-import { BookCard } from "@/components/BookCard";
+import { BookCard } from "@/components/Book.card";
 import { BookFormDialog } from "@/components/BookFormDialog";
 import { BookDetailDialog } from "@/components/BookDetailDialog";
-import { StatsCards } from "@/components/StatsCards";
+import { StatsCards } from "@/components/StarCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -148,3 +148,4 @@ const Index = () => {
 };
 
 export default Index;
+

@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 
 interface Props {
   value: number;
@@ -36,3 +36,4 @@ export function StarRating({ value, onChange, size = 18, readOnly = false }: Pro
     </div>
   );
 }
+

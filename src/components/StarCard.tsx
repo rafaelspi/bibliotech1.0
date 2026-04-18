@@ -30,3 +30,4 @@ export function StatsCards({ books }: { books: Book[] }) {
     </div>
   );
 }
+

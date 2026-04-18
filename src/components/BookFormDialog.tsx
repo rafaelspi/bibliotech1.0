@@ -106,3 +106,4 @@ export function BookFormDialog({ open, onOpenChange, initial, onSave }: Props) {
     </Dialog>
   );
 }
+

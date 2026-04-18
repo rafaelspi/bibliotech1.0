@@ -1,47 +1,93 @@
 import { Book, STATUS_COLORS, STATUS_LABELS } from "@/types/book";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { StarRating } from "./StarRating";
-import { cn } from "@/lib/utils";
-import { BookOpen } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { BookOpen, Calendar, User, Star } from "lucide-react";
 
 interface Props {
-  book: Book;
-  onClick?: () => void;
+  book: Book | null;
+  open: boolean;
+  onOpenChange: (v: boolean) => void;
 }
 
-export function BookCard({ book, onClick }: Props) {
+export function BookDetailDialog({ book, open, onOpenChange }: Props) {
+  if (!book) return null;
+
   return (
-    <article
-      onClick={onClick}
-      className="group cursor-pointer animate-fade-in"
-    >
-      <div className="relative aspect-[2/3] overflow-hidden rounded-lg bg-secondary shadow-book transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_16px_32px_-8px_hsl(25_25%_15%/0.25)]">
-        {book.coverUrl ? (
-          <img
-            src={book.coverUrl}
-            alt={`Capa de ${book.title}`}
-            loading="lazy"
-            className="h-full w-full object-cover"
-            onError={(e) => ((e.currentTarget.style.display = "none"))}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-muted-foreground">
-            <BookOpen className="h-12 w-12" />
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="font-serif text-2xl">{book.title}</DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-6">
+          {/* Cover Image */}
+          <div className="flex justify-center">
+            <div className="relative aspect-[2/3] w-48 overflow-hidden rounded-lg bg-secondary shadow-book">
+              {book.coverUrl ? (
+                <img
+                  src={book.coverUrl}
+                  alt={`Capa de ${book.title}`}
+                  className="h-full w-full object-cover"
+                  onError={(e) => ((e.currentTarget.style.display = "none"))}
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-muted-foreground">
+                  <BookOpen className="h-16 w-16" />
+                </div>
+              )}
+              <Badge
+                className={`absolute left-3 top-3 ${STATUS_COLORS[book.status]}`}
+              >
+                {STATUS_LABELS[book.status]}
+              </Badge>
+            </div>
           </div>
-        )}
-        <span
-          className={cn(
-            "absolute left-2 top-2 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
-            STATUS_COLORS[book.status]
-          )}
-        >
-          {STATUS_LABELS[book.status]}
-        </span>
-      </div>
-      <div className="mt-3 space-y-1">
-        <h3 className="font-serif text-base font-semibold leading-tight line-clamp-2">{book.title}</h3>
-        <p className="text-xs text-muted-foreground line-clamp-1">{book.author}</p>
-        {book.rating > 0 && <StarRating value={book.rating} readOnly size={14} />}
-      </div>
-    </article>
+
+          {/* Book Details */}
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <User className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm font-medium">Autor:</span>
+                <span className="text-sm">{book.author}</span>
+              </div>
+
+              {book.year && (
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">Ano:</span>
+                  <span className="text-sm">{book.year}</span>
+                </div>
+              )}
+
+              {book.genre && (
+                <div className="flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">Gênero:</span>
+                  <span className="text-sm">{book.genre}</span>
+                </div>
+              )}
+
+              {book.rating > 0 && (
+                <div className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm font-medium">Avaliação:</span>
+                  <StarRating value={book.rating} readOnly size={16} />
+                </div>
+              )}
+            </div>
+
+            {book.review && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Resenha:</h4>
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap">{book.review}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 }
+

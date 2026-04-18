@@ -1,6 +1,6 @@
 import { Book, STATUS_COLORS, STATUS_LABELS } from "@/types/book";
 import { StarRating } from "./StarRating";
-import { cn } from "@/lib/utils";
+import { cn } from "@/libs/utils";
 import { BookOpen } from "lucide-react";
 
 interface Props {
@@ -45,3 +45,4 @@ export function BookCard({ book, onClick }: Props) {
     </article>
   );
 }
+
