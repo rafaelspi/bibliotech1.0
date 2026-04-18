@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: bibliotech
+      POSTGRES_PASSWORD: bibliotech
+      POSTGRES_DB: bibliotech
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://bibliotech:bibliotech@postgres:5432/bibliotech
+      JWT_SECRET: troque-este-segredo-em-producao
+      PORT: 3000
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+  sonarqube:
+    image: sonarqube:lts-community
+    restart: unless-stopped
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_extensions:/opt/sonarqube/extensions
+      - sonar_logs:/opt/sonarqube/logs
+
+volumes:
+  pgdata:
+  sonar_data:
+  sonar_extensions:
+  sonar_logs:
