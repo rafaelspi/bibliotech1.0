@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Book } from "@/types/book";
 import { toast } from "sonner";
 
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "http://localhost:3001/api";
 
 export function useBooks() {
   const queryClient = useQueryClient();

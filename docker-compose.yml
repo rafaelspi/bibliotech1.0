@@ -1,54 +1,52 @@
 version: "3.9"
 
+name: bibliotech_1_0
+
 services:
-  postgres-v1:
+  postgres:
     image: postgres:16-alpine
-    container_name: bibliotech-db-v1
     restart: unless-stopped
     environment:
-      POSTGRES_USER: bibliotech
-      POSTGRES_PASSWORD: bibliotech
-      POSTGRES_DB: bibliotech
+      POSTGRES_USER: bibliotech_1_0
+      POSTGRES_PASSWORD: bibliotech_1_0
+      POSTGRES_DB: bibliotech_1_0
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - pgdata_v1:/var/lib/postgresql/data
+      - bibliotech_1_0_pgdata:/var/lib/postgresql/data
 
-  backend-v1:
+  backend:
     build: ./backend
-    container_name: bibliotech-api-v1
     restart: unless-stopped
     depends_on:
-      - postgres-v1
+      - postgres
     environment:
-      DATABASE_URL: postgresql://bibliotech:bibliotech@postgres-v1:5432/bibliotech
+      DATABASE_URL: postgresql://bibliotech_1_0:bibliotech_1_0@postgres:5432/bibliotech_1_0
       JWT_SECRET: troque-este-segredo-em-producao
       PORT: 3000
     ports:
-      - "3000:3000"
+      - "3001:3000"
 
-  frontend-v1:
+  frontend:
     build: .
-    container_name: bibliotech-web-v1
     restart: unless-stopped
     depends_on:
-      - backend-v1
+      - backend
     ports:
-      - "8080:80"
+      - "8081:80"
 
-  sonarqube-v1:
+  sonarqube:
     image: sonarqube:lts-community
-    container_name: bibliotech-sonar-v1
     restart: unless-stopped
     ports:
-      - "9000:9000"
+      - "9001:9000"
     volumes:
-      - sonar_data_v1:/opt/sonarqube/data
-      - sonar_extensions_v1:/opt/sonarqube/extensions
-      - sonar_logs_v1:/opt/sonarqube/logs
+      - bibliotech_1_0_sonar_data:/opt/sonarqube/data
+      - bibliotech_1_0_sonar_extensions:/opt/sonarqube/extensions
+      - bibliotech_1_0_sonar_logs:/opt/sonarqube/logs
 
 volumes:
-  pgdata_v1:
-  sonar_data_v1:
-  sonar_extensions_v1:
-  sonar_logs_v1:
+  bibliotech_1_0_pgdata:
+  bibliotech_1_0_sonar_data:
+  bibliotech_1_0_sonar_extensions:
+  bibliotech_1_0_sonar_logs:

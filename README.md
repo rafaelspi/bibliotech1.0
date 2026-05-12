@@ -30,6 +30,7 @@ Jenkins (CI/CD)
 SonarQube (análise de qualidade)
 🔹 Versionamento
 Git + GitFlow (GitHub)
+
 🚀 Como executar
 ▶️ Rodando apenas o Front-end
 npm install
@@ -49,14 +50,19 @@ Back-end	http://localhost:3000
 PostgreSQL	localhost:5432
 SonarQube	http://localhost:9000
  (admin/admin)
+
 🌿 Estratégia de Branch (GitFlow)
+
 📂 Tipos de branches
+
 main → produção
 develop → integração contínua
 feature/<nome> → novas funcionalidades
 release/<versao> → preparação de versões
 hotfix/<nome> → correções urgentes
+
 🔁 Fluxo básico
+
 git checkout develop
 git checkout -b feature/cadastro-livro
 
